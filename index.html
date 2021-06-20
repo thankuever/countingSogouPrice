@@ -95,7 +95,7 @@
                         <div class="col mt-3 ">
                             <div class="mb-3 ">
                                 <label for="domains" class="form-label ">域名清單 (斷行)
-                                    <div class="btn btn-danger ms-2 " id="clear ">清除</div>
+                                    <div class="btn btn-danger ms-2 " id="clear">清除</div>
                                     <button type="submit " class="btn btn-primary rounded-pilled ms-2 ">計算</button>
                                 </label>
                                 <textarea class="form-control " placeholder="請輸入... " id="domains" style="height: 340px " required></textarea>
@@ -204,7 +204,7 @@
             });
 
             $("#clear").click(function() {
-                $("#domains").val('');
+                $("#domains").text('');
                 $('#total').text(" $0 ");
                 $('#comTotal').val("0 個，共 0 元 ");
                 $('#netTotal').val("0 個，共 0 元 ");
