@@ -64,45 +64,59 @@
             <div class="row justify-content-center needs-validation " novalidate>
                 <div class="col-md-9 mt-5 mt-md-0">
                     <div class="row rounded mt-5 mt-md-1">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="com_price" class="form-label">.com</label>
                             <input type="number" class="form-control " id="com_price" value="80" required min="0" max="10000">
                             <div class="valid-feedback">
                                 OK!
                             </div>
                         </div>
-                        <div class="col-md-6 ">
+                        <div class="col-md-4 ">
                             <label for="net_price " class="form-label ">.net</label>
                             <input type="number " class="form-control " id="net_price" value="80" required min="0" max="10000">
                             <div class="valid-feedback">
                                 OK!
                             </div>
                         </div>
-                        <div class="col-md-6 mt-3">
+                        <div class="col-md-4">
                             <label for="org_price" class="form-label">.org</label>
                             <input type="number" class="form-control " id="org_price" value="80" required min="0" max="10000">
                             <div class="valid-feedback ">
                                 OK!
                             </div>
                         </div>
-                        <div class="col-md-6 mt-3">
+                        <div class="col-md-4 mt-3">
+                            <label for="org_price" class="form-label">.cc</label>
+                            <input type="number" class="form-control " id="cc_price" value="70" required min="0" max="10000">
+                            <div class="valid-feedback ">
+                                OK!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <label for="org_price" class="form-label">.tv</label>
+                            <input type="number" class="form-control " id="tv_price" value="70" required min="0" max="10000">
+                            <div class="valid-feedback ">
+                                OK!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mt-3">
                             <label for="cn_price" class="form-label ">.cn</label>
                             <input type="number" class="form-control " id="cn_price" value="50" required min="0" max="10000">
                             <div class="valid-feedback ">
                                 OK!
                             </div>
                         </div>
-                        <div class="col mt-3 ">
-                            <div class="mb-3 ">
-                                <label for="domains" class="form-label ">域名清單 (斷行)
+                        <div class="col mt-3">
+                            <div class="mb-3">
+                                <label for="domains" class="form-label ">域名清單
                                     <div class="btn btn-danger ms-2 " id="clear">清除</div>
                                     <button type="submit " class="btn btn-primary rounded-pilled ms-2 ">計算</button>
                                 </label>
-                                <textarea class="form-control " placeholder="請輸入... " id="domains" style="height: 340px " required></textarea>
+                                <textarea class="form-control " placeholder="請輸入... " id="domains" style="height: 250px " required></textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
+                    <div class="row ">
                         <div class="col-md-3 col-6 ">
                             <label for="staticEmail " class="col-sm-2 col-form-label ">.com</label>
                             <div class="col-sm-10 ">
@@ -122,12 +136,24 @@
                             </div>
                         </div>
                         <div class="col-md-3 col-6 ">
-                            <label for="staticEmail " class="col-sm-2 col-form-label ">.cn</label>
+                            <label for="staticEmail" class="col-sm-2 col-form-label ">.cn</label>
                             <div class="col-sm-10 ">
                                 <input type="text " readonly class="form-control-plaintext " id="cnTotal" value="0個，共0元 ">
                             </div>
                         </div>
-                        <div class="col-md-6 text-center ">
+                        <div class="col-md-3 col-6 ">
+                            <label for="staticEmail" class="col-sm-2 col-form-label ">.cc</label>
+                            <div class="col-sm-10 ">
+                                <input type="text " readonly class="form-control-plaintext " id="ccTotal" value="0個，共0元 ">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-6 ">
+                            <label for="staticEmail" class="col-sm-2 col-form-label ">.tv</label>
+                            <div class="col-sm-10 ">
+                                <input type="text " readonly class="form-control-plaintext " id="tvTotal" value="0個，共0元 ">
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-center ">
                             <label for="staticEmail " class="col-sm-2 col-form-label"></label>
                             <h2 class="p-2" id="total">域名總共0個，共0元 </h2>
 
@@ -154,16 +180,23 @@
                 let comPrice = parseInt($("#com_price").val());
                 let orgPrice = parseInt($("#org_price").val());
                 let netPrice = parseInt($("#net_price").val());
+                let ccPrice = parseInt($("#cc_price").val());
+                let tvPrice = parseInt($("#tv_price").val());
+
                 let domains = $('#domains').val().split('\n');
                 let comTotalPrice = 0;
                 let netTotalPrice = 0;
                 let orgTotalPrice = 0;
                 let cnTotalPrice = 0;
+                let ccTotalPrice = 0;
+                let tvTotalPrice = 0;
 
                 let cnCount = 0;
                 let comCount = 0;
                 let orgCount = 0;
                 let netCount = 0;
+                let ccCount = 0;
+                let tvCount = 0;
                 let totalCount = 0;
                 let total = 0;
                 //暫存
@@ -191,6 +224,17 @@
                         totalCount++;
                         total += orgPrice;
                         orgTotalPrice += orgPrice;
+                    } else if (domains[i].indexOf(".cc") > 0) {
+                        ccCount++;
+                        totalCount++;
+                        total += ccPrice;
+                        ccTotalPrice += ccPrice;
+
+                    } else if (domains[i].indexOf(".tv") > 0) {
+                        tvCount++;
+                        totalCount++;
+                        total += tvPrice;
+                        tvTotalPrice += tvPrice;
                     }
                 }
 
@@ -199,7 +243,8 @@
                 $('#netTotal').val(netCount + "個，共 " + netTotalPrice + "元");
                 $('#orgTotal').val(orgCount + "個，共 " + orgTotalPrice + "元");
                 $('#cnTotal').val(cnCount + "個，共 " + cnTotalPrice + "元");
-
+                $('#ccTotal').val(ccCount + "個，共 " + ccTotalPrice + "元");
+                $('#tvTotal').val(tvCount + "個，共 " + tvTotalPrice + "元");
 
             });
 
@@ -210,6 +255,8 @@
                 $('#netTotal').val("0 個，共 0 元 ");
                 $('#orgTotal').val("0 個，共 0 元 ");
                 $('#cnTotal').val("0 個，共 0 元 ");
+                $('#ccTotal').val("0 個，共 0 元 ");
+                $('#tvTotal').val("0 個，共 0 元 ");
 
             });
             $("#domains").blur(function() {
@@ -217,7 +264,7 @@
                 let domains = $('#domains').val().split('\n');
                 let i;
                 for (i = 0; i < domains.length; i++) {
-                    if (domains[i].indexOf(".cn") < 0 && domains[i].indexOf(".com") < 0 && domains[i].indexOf(".net") < 0 && domains[i].indexOf(".org") < 0) {
+                    if (domains[i].indexOf(".cn") < 0 && domains[i].indexOf(".com") < 0 && domains[i].indexOf(".net") < 0 && domains[i].indexOf(".org") < 0 && domains[i].indexOf(".cc") < 0 && domains[i].indexOf(".tv") < 0) {
                         domainsText = domainsText.replace(domains[i], "");
                     }
                 }
